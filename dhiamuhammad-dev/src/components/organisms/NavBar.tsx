@@ -2,12 +2,14 @@
 import React, { useState } from "react";
 import { NavButtons } from "../molecules/NavButtons";
 import { ThemeSwitch } from "../atoms/NavButton";
+import { useRecoilState } from "recoil";
+import { ThemeState } from "@/atoms/themeAtoms";
 
 const NavBar: React.FC = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [themeState, setThemeState] = useRecoilState(ThemeState);
 
   const handleThemeToggle = () => {
-    setIsDarkMode(!isDarkMode);
+    setThemeState(!themeState);
   };
 
   //   const handleNavigation = (section: string) => {
@@ -25,7 +27,7 @@ const NavBar: React.FC = () => {
     <nav className="flex space-x-2 justify-center my-4  w-full">
       <div className="container flex justify-between items-center mx-4">
         <NavButtons />
-        <ThemeSwitch isDarkMode={isDarkMode} onToggle={handleThemeToggle} />
+        <ThemeSwitch isDarkMode={themeState} />
       </div>
     </nav>
   );
